@@ -3,15 +3,22 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sync"
 	"time"
 )
 
 
 func main() {
 	fmt.Println("what is today's lucky number?")
-	go getLuckyNum()
+	var wg sync.WaitGroup
+	wg.Add(1)
 
-	time.Sleep(time.Second * 5)
+	go func() {
+		defer wg.Done()
+		getLuckyNum()
+	}()
+
+	wg.Wait()
 }
 
 func getLuckyNum() {
