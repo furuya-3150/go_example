@@ -7,10 +7,10 @@ import (
 
 func main() {
 	for i := 0; i < 3; i++ {
-    go func() {
-			// forが回り切った後に上書きされた2で3回出力される
+    go func(i int) {
+			// iをコピーして上書きされないよう修正
 			fmt.Println(i)
-    }()
+    }(i)
 	}
 	time.Sleep(time.Second * 1)
 }
