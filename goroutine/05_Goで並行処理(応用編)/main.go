@@ -9,23 +9,21 @@ func main() {
 	ch1 := make(chan int)
 
 	go func() {
-		time.Sleep(4 * time.Second)
+		time.Sleep(time.Second)
 		ch1 <- 1
 	}()
 
+	timeout := time.After(1 * time.Second)
 	for {
 		select {
 		case s := <-ch1:
 			fmt.Println(s)
-		case <-time.After(1 * time.Second): // ch1が受信できないまま1秒で発動
+		case <- timeout:
 			fmt.Println("time out")
 			return
-		/*
-		// これがあると無限ループする
 		default:
 			fmt.Println("default")
 			time.Sleep(time.Millisecond * 100)
-		*/
 		}
 	}
 }
