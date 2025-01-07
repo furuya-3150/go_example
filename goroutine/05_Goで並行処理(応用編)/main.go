@@ -13,13 +13,14 @@ func main() {
 		ch1 <- 1
 	}()
 
-	timeout := time.After(1 * time.Second)
+	t := time.NewTicker(time.Second)
+
 	for {
 		select {
 		case s := <-ch1:
 			fmt.Println(s)
-		case <- timeout:
-			fmt.Println("time out")
+		case <- t.C:
+			fmt.Println("time out by ticker")
 			return
 		default:
 			fmt.Println("default")
