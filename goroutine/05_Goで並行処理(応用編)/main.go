@@ -14,6 +14,7 @@ func main() {
 	}()
 
 	t := time.NewTicker(time.Second)
+	defer t.Stop()
 
 	for {
 		select {
