@@ -10,6 +10,9 @@ import (
 
 func AllUsers(w http.ResponseWriter, r *http.Request) {
 	db, err = gorm.Open("sqlite3", "test.db")
+	if err != nil {
+		panic("Could not connect to the database")
+	}
 	defer db.Close()
 
 	var users []User
