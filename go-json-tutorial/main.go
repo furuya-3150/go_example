@@ -29,4 +29,13 @@ func main() {
 	}
 
 	fmt.Println(string(byteArray))
+
+	var book2 Book
+	bookJson := `{"title": "onigashimaTaro", "author": {"name": "hogetaro", "age": 12}}`
+	err = json.Unmarshal([]byte(bookJson), &book2)
+	if err != nil {
+		fmt.Println(err)
+	}
+	
+	fmt.Printf("%+v\n", book2)
 }
